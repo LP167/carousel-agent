@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel Agent Console</title>
+<style>
+:root{--bg:#F6F4EF;--panel:#FFFFFF;--ink:#1D2420;--muted:#66706A;--line:#E3DED4;--ok:#2F7A4F;--okbg:#E7F3EC;--no:#B42318;--nobg:#FDECEA;--accent:#3E6B55}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,BlinkMacSystemFont,"Pretendard","Segoe UI",sans-serif}
+header{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
+header h1{font-size:16px;margin:0;font-weight:700}
+select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.status{padding:3px 10px;border-radius:999px;font-weight:700;font-size:12px;background:#EEE}
+.status.awaiting_signoff,.status.published,.status.approved{background:var(--okbg);color:var(--ok)}
+.status.needs_review,.status.stopped{background:var(--nobg);color:var(--no)}
+.status.running{background:#FFF4D6;color:#8A5A00}
+main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px;padding:16px 20px;height:calc(100vh - 58px)}
+section{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:auto;min-height:0}
+section h2{position:sticky;top:0;background:var(--panel);margin:0;padding:12px 16px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.turn{padding:10px 16px;border-bottom:1px solid var(--line)}
+.turn .head{display:flex;gap:10px;align-items:baseline}
+.turn .n{color:var(--muted);font-variant-numeric:tabular-nums;min-width:52px}
+.turn .tool{white-space:nowrap;font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.turn .args{flex:1;min-width:0;color:var(--muted);font-family:ui-monospace,Menlo,monospace;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.turn .obs{margin:6px 0 0 62px;padding:8px 10px;border-radius:8px;white-space:pre-wrap;font-size:13px;background:var(--okbg)}
+.turn.no .obs{background:var(--nobg);color:var(--no)}
+.turn.no .tool{color:var(--no)}
+.turn .think{margin:4px 0 0 62px;color:var(--muted);font-style:italic}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:14px}
+.slide{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#FAFAF8}
+.slide img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;cursor:zoom-in}
+.slide .cap{padding:6px 8px;font-size:12px;color:var(--muted)}
+.slide.bad{border-color:var(--no)}
+.slide.bad .cap{color:var(--no)}
+.card{margin:14px;padding:14px;border:1px solid var(--line);border-radius:10px}
+.card h3{margin:0 0 8px;font-size:15px}
+textarea{width:100%;min-height:60px;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px}
+button{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid transparent;cursor:pointer}
+.approve{background:var(--ok);color:#fff}
+.reject{background:var(--panel);border-color:var(--no);color:var(--no)}
+.row{display:flex;gap:8px;margin-top:8px}
+.flags{margin:0;padding:0 16px 12px 32px;color:var(--muted)}
+.empty{padding:16px;color:var(--muted)}
+#zoom{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:9}
+#zoom img{max-height:92vh;max-width:92vw;border-radius:6px}
+@media (max-width:820px){main{grid-template-columns:1fr;height:auto}section{max-height:70vh}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Carousel Agent</h1>
+  <select id="runs"></select>
+  <span id="status" class="status">—</span>
+  <span id="meta" style="color:var(--muted)"></span>
+</header>
+<main>
+  <section><h2>Agent timeline</h2><div id="timeline"><div class="empty">No run selected.</div></div></section>
+  <section>
+    <h2 id="slidesTitle">Rendered slides</h2>
+    <div id="signoff"></div>
+    <div id="grid" class="grid"></div>
+    <ul id="flags" class="flags"></ul>
+  </section>
+</main>
+<div id="zoom"><img alt=""></div>
+<script>
+let current = null, lastLen = -1;
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function loadRuns() {
+  const runs = await (await fetch('/api/runs')).json();
+  const sel = $('#runs'), prev = sel.value;
+  sel.innerHTML = runs.map(r => `<option value="${esc(r.id)}">${esc(r.id)} · ${esc(r.status)}</option>`).join('');
+  current = prev && runs.some(r => r.id === prev) ? prev : (runs[0] && runs[0].id);
+  if (current) sel.value = current;
+}
+
+async function refresh() {
+  if (!current) return;
+  const r = await (await fetch('/api/runs/' + encodeURIComponent(current))).json();
+  $('#status').textContent = r.status; $('#status').className = 'status ' + r.status;
+  const refused = r.timeline.filter(e => !e.ok).length;
+  $('#meta').textContent = `${r.timeline.length} turns · ${refused} refused · outline coverage ${r.outline_score == null ? '—' : Math.round(r.outline_score * 100) + '%'}`;
+  if (r.timeline.length !== lastLen) {
+    lastLen = r.timeline.length;
+    $('#timeline').innerHTML = r.timeline.map(e => `
+      <div class="turn ${e.ok ? 'ok' : 'no'}">
+        <div class="head"><span class="n">turn ${e.turn}</span><span class="tool">${e.ok ? '✔' : '✘'} ${esc(e.tool)}</span>
+        <span class="args">${esc(JSON.stringify(e.args))}</span></div>
+        ${e.think ? `<div class="think">${esc(e.think)}</div>` : ''}
+        <div class="obs">${esc(e.observation.length > 900 ? e.observation.slice(0, 900) + '…' : e.observation)}</div>
+      </div>`).join('') || '<div class="empty">Waiting for the first turn…</div>';
+    const tl = $('#timeline').parentElement; tl.scrollTop = tl.scrollHeight;
+  }
+  $('#slidesTitle').textContent = r.render_version ? `Rendered slides · v${r.render_version}${r.stale ? ' (outdated)' : ''}` : 'Rendered slides';
+  $('#grid').innerHTML = r.slides.map(s => `
+    <div class="slide ${s.problems.length ? 'bad' : ''}">
+      <img src="${esc(s.png)}?v=${r.render_version}" alt="${esc(s.id)}" data-src="${esc(s.png)}?v=${r.render_version}">
+      <div class="cap">${esc(s.id)}${s.problems.length ? ' · ' + esc(s.problems[0]) : ''}</div></div>`).join('');
+  $('#flags').innerHTML = r.flags.map(f => `<li>${esc(f)}</li>`).join('');
+  let card = '';
+  if (r.status === 'awaiting_signoff') card = `<div class="card"><h3>Ready for sign-off</h3>
+      Every sentence is quoted from the sources, the claim check passed, and Muse Spark looked at each slide.
+      <textarea id="note" placeholder="Note for the agent if you send it back"></textarea>
+      <div class="row"><button class="approve" onclick="act('approve')">Approve &amp; publish (mock)</button>
+      <button class="reject" onclick="act('reject')">Send back</button></div></div>`;
+  else if (r.status === 'needs_input') card = `<div class="card"><h3>The agent has a question</h3>${esc(r.question)}<p style="color:var(--muted)">Answer from the terminal: python run.py answer ${esc(r.id)} "…"</p></div>`;
+  else if (r.status === 'published') card = `<div class="card"><h3>Published (mock)</h3>Instagram publishing is simulated in this build — see published.json.</div>`;
+  $('#signoff').innerHTML = card;
+}
+
+async function act(kind) {
+  const note = ($('#note') || {}).value || '';
+  await fetch(`/api/runs/${encodeURIComponent(current)}/${kind}`, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({note})});
+  lastLen = -1; refresh();
+}
+
+$('#runs').onchange = e => { current = e.target.value; lastLen = -1; refresh(); };
+document.addEventListener('click', e => {
+  if (e.target.matches('.slide img')) { $('#zoom img').src = e.target.dataset.src; $('#zoom').style.display = 'flex'; }
+  else if (e.target.closest('#zoom')) $('#zoom').style.display = 'none';
+});
+loadRuns().then(refresh);
+setInterval(() => { loadRuns(); refresh(); }, 1500);
+</script>
+</body>
+</html>
