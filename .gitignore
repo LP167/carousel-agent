@@ -6,3 +6,5 @@ runs/*
 tests/fixtures/
 .pytest_cache/
 .DS_Store
+API.env.rtf
+*.rtf

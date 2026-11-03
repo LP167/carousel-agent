@@ -43,12 +43,15 @@ def _pick_text(d) -> str:
     return ""
 
 
-def transcribe(t: Transport, audio_path: Path) -> str:
+def transcribe(t: Transport, audio_path: Path, keywords: list[str] | None = None) -> str:
     model = t.cfg["models"]["transcribe"]
     wav = _to_wav(Path(audio_path))
 
     def live():
-        req = {"model": model, "audioEncoding": "WAV", "mode": "PUSH_TO_TALK"}
+        req = {"model": model, "audioEncoding": "WAV", "mode": "PUSH_TO_TALK",
+               "languageBias": t.cfg.get("voice", {}).get("languages", ["English"])}
+        if keywords:
+            req["keywords"] = keywords[:20]
         files = {
             "request": (None, json.dumps(req), "application/json"),
             "audio": (wav.name, wav.read_bytes(), "audio/wav"),

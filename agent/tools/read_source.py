@@ -19,7 +19,11 @@ def run(args, ctx):
         return True, (f"'{args['source_id']}' is a product photo. It has no text to quote. Use it with "
                       f"request_visual(kind='cutout', source_id='{args['source_id']}', prompt='<object to cut out>') on a visual slide.")
     if src["kind"] == "audio" and not src["pages"]:
-        text = transcribe.transcribe(ctx.t, src["path"])
+        # bias recognition toward names that appear in the brand's own documents
+        import re
+        docs = " ".join(p for s in rec.sources.values() for p in (s.get("pages") or []))
+        names = sorted(set(re.findall(r"(?<=[a-z,] )[A-Z][a-zA-Z-]{2,}", docs)))
+        text = transcribe.transcribe(ctx.t, src["path"], keywords=[rec.brand.get("name", "")] + names)
         src["pages"] = [text.strip()]
     src["read"] = True
     body = "\n\n".join(f"--- page {i+1} ---\n{p}" for i, p in enumerate(src["pages"]))

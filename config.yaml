@@ -9,6 +9,9 @@ api:
   max_retries: 3
   timeout_s: 120
 
+voice:
+  languages: [English]        # languageBias for Voice Transcribe (auto-detect guessed Korean on English audio)
+
 agent:
   max_turns: 40
   max_outline_rejects: 3
