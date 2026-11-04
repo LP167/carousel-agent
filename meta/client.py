@@ -84,6 +84,9 @@ class Transport:
             path = self.replay_dir / "calls" / f"{tag}.json"
             if not path.exists():
                 raise ReplayMiss(f"no recorded response {path.name}")
+            delay = float(os.environ.get("REPLAY_DELAY", "0") or 0)  # pacing for screen recordings
+            if delay:
+                time.sleep(delay)
             return json.loads(path.read_text())["response"]
 
         tries = self.cfg["api"]["max_retries"]

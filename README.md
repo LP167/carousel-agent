@@ -1,6 +1,6 @@
 # Carousel Agent
 
-**An agent that turns a brand's own material into an Instagram carousel it can prove — every sentence quoted from the source, every slide looked at by Muse Spark before a human signs off.**
+**An agent that turns a brand's own material into an Instagram carousel it can prove — every factual sentence quoted from the source, every slide looked at by Muse Spark before a human signs off.**
 
 Built for the Meta Global AI Developer Hackathon · Indie track · *Build for Your World*.
 All code was written during the hackathon — see [PROVENANCE.md](PROVENANCE.md).
