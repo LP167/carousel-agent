@@ -1,0 +1,32 @@
+{
+ "kind": "verify_outline_coverage",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": false,
+  "schema": "coverage"
+ },
+ "response": {
+  "content": "{\"coverage\": [{\"covered_by\": \"s2\", \"index\": 0}, {\"covered_by\": \"s3\", \"index\": 1}, {\"covered_by\": \"s4\", \"index\": 2}, {\"covered_by\": \"s5\", \"index\": 3}, {\"covered_by\": \"none\", \"index\": 4}, {\"covered_by\": \"s7\", \"index\": 5}, {\"covered_by\": \"s8\", \"index\": 6}]}",
+  "tool_calls": [],
+  "usage": {
+   "completion_tokens": 3567,
+   "prompt_tokens": 407,
+   "total_tokens": 3974,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 3458,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

@@ -9,11 +9,14 @@ SPEC = {"name": "render_deck",
 
 
 def footer_for(rec, slide_id):
+    seen = []
     for c in rec.claims_for(slide_id):
         for q in c.get("quotes", []):
             src = rec.sources[q["source_id"]]
-            return f"Source: {src['title']} · p.{q['page']}"
-    return ""
+            label = "Owner's voice brief (transcript)" if src["kind"] == "audio" else f"{src['title']} · p.{q['page']}"
+            if label not in seen:
+                seen.append(label)
+    return ("Source: " + " / ".join(seen)) if seen else ""
 
 
 def build_slides(rec):

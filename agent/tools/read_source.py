@@ -12,6 +12,8 @@ SPEC = {
 def run(args, ctx):
     rec = ctx.record
     src = rec.sources.get(args["source_id"])
+    if src and src.get("read") and src["kind"] != "photo":
+        return True, f"{args['source_id']} was already read; its full text is in SOURCES ALREADY READ above."
     if not src:
         return False, f"no source '{args['source_id']}'. Valid ids: {', '.join(rec.sources)}"
     if src["kind"] == "photo":
@@ -26,5 +28,8 @@ def run(args, ctx):
         text = transcribe.transcribe(ctx.t, src["path"], keywords=[rec.brand.get("name", "")] + names)
         src["pages"] = [text.strip()]
     src["read"] = True
+    if src["kind"] == "audio":
+        return True, (f"{args['source_id']} (owner's voice brief, transcribed by Muse Voice Transcribe). Facts the owner states here "
+                      f"count as a source: quote them with source_id='{args['source_id']}', page=1.\n--- page 1 ---\n{src['pages'][0]}")
     body = "\n\n".join(f"--- page {i+1} ---\n{p}" for i, p in enumerate(src["pages"]))
     return True, f"{args['source_id']} ({src['kind']}, '{src['title']}'):\n{body}"

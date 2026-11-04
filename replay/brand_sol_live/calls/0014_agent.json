@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Filling your tester quote and November offer next.",
+  "tool_calls": [
+   {
+    "id": "call_bee5a2a8-4c08-475a-ae70-3f826b23df0f",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":2,\"quote\":\"I finally drink water at my desk because it is still cold at 4 pm.\",\"source_id\":\"product_guide\"}],\"slide_id\":\"s5\",\"text\":\"I finally drink water at my desk because it is still cold at 4 pm.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 694,
+   "prompt_tokens": 2977,
+   "total_tokens": 3671,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 547,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 2417,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

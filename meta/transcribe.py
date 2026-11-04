@@ -45,9 +45,8 @@ def _pick_text(d) -> str:
 
 def transcribe(t: Transport, audio_path: Path, keywords: list[str] | None = None) -> str:
     model = t.cfg["models"]["transcribe"]
-    wav = _to_wav(Path(audio_path))
-
     def live():
+        wav = _to_wav(Path(audio_path))  # converted only for a live call, so replay needs no ffmpeg
         req = {"model": model, "audioEncoding": "WAV", "mode": "PUSH_TO_TALK",
                "languageBias": t.cfg.get("voice", {}).get("languages", ["English"])}
         if keywords:
@@ -66,4 +65,4 @@ def transcribe(t: Transport, audio_path: Path, keywords: list[str] | None = None
         raw = r.json()
         return {"text": _pick_text(raw), "raw": raw}
 
-    return t.call("transcribe", live, {"model": model, "file": wav.name})["text"]
+    return t.call("transcribe", live, {"model": model, "file": Path(audio_path).name})["text"]

@@ -1,0 +1,32 @@
+{
+ "kind": "verify_visual",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": false,
+  "schema": "visual_check"
+ },
+ "response": {
+  "content": "{\"slides\": [{\"issues\": [], \"slide_id\": \"s1\"}, {\"issues\": [], \"slide_id\": \"s2\"}, {\"issues\": [], \"slide_id\": \"s3\"}, {\"issues\": [], \"slide_id\": \"s4\"}, {\"issues\": [], \"slide_id\": \"s5\"}, {\"issues\": [], \"slide_id\": \"s6\"}, {\"issues\": [], \"slide_id\": \"s7\"}, {\"issues\": [], \"slide_id\": \"s8\"}]}",
+  "tool_calls": [],
+  "usage": {
+   "completion_tokens": 2766,
+   "prompt_tokens": 4579,
+   "total_tokens": 7345,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 2657,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

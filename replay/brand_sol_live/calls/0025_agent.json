@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Cover and bottle copy are set — now adding the visuals.",
+  "tool_calls": [
+   {
+    "id": "call_220aebbe-9097-48a0-9049-afb91f8bc919",
+    "function": {
+     "arguments": "{\"kind\":\"background\",\"prompt\":\"soft sage green minimal desk texture with gentle morning light, calm office mood, no products\",\"slide_id\":\"s1\",\"source_id\":\"\"}",
+     "name": "request_visual"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 605,
+   "prompt_tokens": 3045,
+   "total_tokens": 3650,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 476,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

@@ -48,6 +48,9 @@ def finish(rec, run_dir):
     if rec.status == "needs_input":
         print(f"question: {rec.question}\n→ python run.py answer {run_dir.name} \"...\"")
     if rec.status == "awaiting_signoff":
+        for sid, s in rec.sources.items():
+            if s["kind"] == "audio" and s.get("pages"):
+                print(f"\n{C['b']}Voice brief transcript ({sid}) - check names and numbers before approving:{C['x']}\n  {s['pages'][0]}\n")
         print(f"slides: {run_dir / 'render' / ('v' + str(rec.render['version']))}\n→ python run.py approve {run_dir.name}   or   reject {run_dir.name} \"note\"")
     for f in rec.flags:
         print(f"flag: {f}")
@@ -129,9 +132,10 @@ def cmd_replay(src):
     first = json.loads((src / "state.json").read_text())
     run_id = time.strftime("%m%d-%H%M%S") + "-replay"
     run_dir = RUNS / run_id
-    rec = DeckRecord(run_id=run_id, objective=first["objective"], brand=first["brand"],
-                     sources={k: {**v, "read": False, "pages": v["pages"] if v["kind"] != "audio" else []}
-                              for k, v in first["sources"].items()})
+    # re-discover the sample files on this machine (recorded paths belong to the recording machine)
+    sample = ROOT / "samples" / first["run_id"].split("-", 2)[2]
+    _, _, sources = discover(sample)
+    rec = DeckRecord(run_id=run_id, objective=first["objective"], brand=first["brand"], sources=sources)
     rec.save(run_dir)
     print(f"REPLAY of {src.name} (recorded model responses, no API key used)\n")
     rec = loop.run(rec, transport(run_dir, "replay", src), run_dir, show)

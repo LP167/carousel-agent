@@ -10,6 +10,7 @@ true and that every slide actually looks right — and this project is a new, ge
 The "checks live inside the tools" principle follows the public talk pattern from Meta's Verifiable Agents
 workshop; no workshop code was copied, and all file names, functions and prompts here are original.
 
-All sample materials in `samples/` (brand, product guide, photos, voice brief) are fictional and were created
-by the author for this project. Fonts: Pretendard (SIL OFL 1.1). SAM output parsing uses Meta's
+All sample materials in `samples/` are fictional and were created for this project: the brand and product guide
+were written by the author, the voice brief is the author's own recording, and `bottle_photo.png` was generated
+with Muse Image (muse-image-1.0) as a stand-in for an owner's phone photo — no third-party photos are used. Fonts: Pretendard (SIL OFL 1.1). SAM output parsing uses Meta's
 `meta-sam-parser` package as a dependency (installed from PyPI, not vendored).

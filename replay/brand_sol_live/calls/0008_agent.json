@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Building your desk-friendly bottle carousel — starting with the cold-keeping claims.",
+  "tool_calls": [
+   {
+    "id": "call_2dc1f5a3-b4d5-443c-93b0-5a7dd444670d",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":1,\"quote\":\"The double-wall vacuum body keeps drinks cold for up to 24 hours and hot for up to 12 hours.\",\"source_id\":\"product_guide\"}],\"slide_id\":\"s2\",\"text\":\"Keeps drinks cold for up to 24 hours.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 2259,
+   "prompt_tokens": 3333,
+   "total_tokens": 5592,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 2107,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

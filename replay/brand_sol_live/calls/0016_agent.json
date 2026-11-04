@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Adding your November strap offer to round out the slide.",
+  "tool_calls": [
+   {
+    "id": "call_ac726542-e50b-4bb5-88de-1ade10360a5d",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":1,\"quote\":\"the first 50 customer at our Seongsudong pop-up get a free carry strap\",\"source_id\":\"voice_brief\"}],\"slide_id\":\"s7\",\"text\":\"First 50 customers get a free carry strap.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 1489,
+   "prompt_tokens": 3028,
+   "total_tokens": 4517,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 1345,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

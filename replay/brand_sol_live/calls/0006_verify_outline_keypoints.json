@@ -1,0 +1,32 @@
+{
+ "kind": "verify_outline_keypoints",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": false,
+  "schema": "keypoints"
+ },
+ "response": {
+  "content": "{\"keypoints\": [{\"category\": \"benefit\", \"point\": \"Keeps drinks cold for up to 24 hours and hot for up to 12 hours when filled to the top with lid closed at 22\\u00b0C room temperature\"}, {\"category\": \"spec\", \"point\": \"Body is 18/8 stainless steel; lid is BPA-free polypropylene with silicone seal\"}, {\"category\": \"other\", \"point\": \"Hand wash the body with warm water and mild soap; lid is top-rack dishwasher safe; do not put body in dishwasher, freezer or microwave\"}, {\"category\": \"proof\", \"point\": \"Tested with 40 office workers in Seoul for two weeks \\u2014 one tester wrote: \\\"I finally drink water at my desk because it is still cold at 4 pm\\\"\"}, {\"category\": \"spec\", \"point\": \"Holds 500 ml and weighs 310 g empty; fits most car cup holders and backpack side pocket\"}, {\"category\": \"price_or_terms\", \"point\": \"November launch price is 28,000 won instead of 32,000 won; two-year warranty against vacuum seal defects\"}, {\"category\": \"other\", \"point\": \"Order online at sol-studio.example or visit Seongsu-dong pop-up on weekends in November; first 50 pop-up customers get a free carry strap\"}]}",
+  "tool_calls": [],
+  "usage": {
+   "completion_tokens": 3135,
+   "prompt_tokens": 636,
+   "total_tokens": 3771,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 2843,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

@@ -23,7 +23,13 @@ def _messages(rec: DeckRecord) -> list:
     obs = "\n\n".join(
         f"[turn {e['turn']}] {e['tool']}({json.dumps(e['args'], ensure_ascii=False)[:300]}) → {'OK' if e['ok'] else 'REFUSED'}: {e['observation'][:4000]}"
         for e in recent) or "(nothing yet — start by reading the sources)"
-    user = f"OBJECTIVE:\n{rec.objective}\n\nCURRENT STATE:\n{rec.summary()}\n\nRECENT RESULTS:\n{obs}\n\nChoose the next single tool call."
+    texts = []
+    for sid, s in rec.sources.items():
+        if s.get("read") and s.get("pages"):
+            label = "owner's voice brief transcript" if s["kind"] == "audio" else s["title"]
+            texts.append(f"=== {sid} ({label}) ===\n" + "\n".join(f"--- page {i+1} ---\n{p}" for i, p in enumerate(s["pages"])))
+    src = ("SOURCES ALREADY READ (quote from these; no need to read them again):\n" + "\n\n".join(texts)[:40000] + "\n\n") if texts else ""
+    user = f"OBJECTIVE:\n{rec.objective}\n\n{src}CURRENT STATE:\n{rec.summary()}\n\nRECENT RESULTS:\n{obs}\n\nChoose the next single tool call."
     return [{"role": "system", "content": PLAYBOOK}, {"role": "user", "content": user}]
 
 

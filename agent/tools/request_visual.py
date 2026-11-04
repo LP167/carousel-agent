@@ -7,7 +7,7 @@ SPEC = {
     "name": "request_visual",
     "description": ("Create an image for a slide. kind='cutout': SAM 3.1 cuts the named object out of a product photo "
                     "(source_id = a photo source, prompt = the object, e.g. 'water bottle'). kind='background': Muse Image "
-                    "generates a background (prompt = scene, no text in image). Cover slides should get a background."),
+                    "generates a background (prompt = scene or texture only — never a product, the product comes from the cutout). Cover slides should get a background."),
     "parameters": {"type": "object", "additionalProperties": False, "required": ["slide_id", "kind", "prompt", "source_id"],
                    "properties": {"slide_id": {"type": "string"},
                                   "kind": {"type": "string", "enum": ["cutout", "background"]},
@@ -36,8 +36,10 @@ def run(args, ctx):
         msg = f"cutout saved ({r['size'][0]}x{r['size'][1]}, {r['objects_found']} match(es), mask covers {r['mask_coverage']:.0%} of its box)"
     else:
         b = rec.brand
-        prompt = (f"{args['prompt']}. Calm, uncluttered composition with empty space in the lower half for a text panel. "
-                  f"Palette close to {b.get('bg', '')} and {b.get('accent', '')}. No text, no letters, no logos, no watermark.")
+        prompt = (f"{args['prompt']}. Background only: surfaces, light and texture. Calm, uncluttered composition with empty "
+                  f"space in the lower half for a text panel. Palette close to {b.get('bg', '')} and {b.get('accent', '')}. "
+                  f"Do not show any bottle, cup, tumbler, container or other product (the real product appears elsewhere). "
+                  f"No text, no letters, no logos, no watermark.")
         p = image.generate(ctx.t, prompt, out_dir / f"{args['slide_id']}_background.png")
         from PIL import Image
         if min(Image.open(p).size) < 512:

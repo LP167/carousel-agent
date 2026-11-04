@@ -103,6 +103,7 @@ async function refresh() {
   let card = '';
   if (r.status === 'awaiting_signoff') card = `<div class="card"><h3>Ready for sign-off</h3>
       Every sentence is quoted from the sources, the claim check passed, and Muse Spark looked at each slide.
+      ${(r.transcripts || []).map(t => `<div style="margin-top:10px;padding:10px;border-radius:8px;background:#FFF4D6"><b>Voice brief transcript — check names and numbers before approving</b><br>${esc(t.text)}</div>`).join('')}
       <textarea id="note" placeholder="Note for the agent if you send it back"></textarea>
       <div class="row"><button class="approve" onclick="act('approve')">Approve &amp; publish (mock)</button>
       <button class="reject" onclick="act('reject')">Send back</button></div></div>`;

@@ -41,3 +41,12 @@ def needs_quote(slide_type: str, text: str) -> bool:
     if slide_type in ("cover", "cta"):
         return bool(NUMERIC.search(text))
     return True
+
+
+NUMBER = re.compile(r"\d+(?:[.,/]\d+)*")
+
+
+def number_gaps(text: str, quotes: list) -> list[str]:
+    """Numbers in the sentence that no quote contains. Checked in code so an invented figure cannot slip through."""
+    quoted = normalize(" ".join(q.get("quote", "") for q in quotes)).replace(",", "")
+    return [n for n in dict.fromkeys(NUMBER.findall(text)) if n.replace(",", "") not in quoted]

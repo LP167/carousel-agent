@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Fixing the flagged claims to match the sources exactly.",
+  "tool_calls": [
+   {
+    "id": "call_1a0c2cde-5453-48fa-9b79-1a9912a4b581",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":1,\"quote\":\"the first 50 customer at our Seongsudong pop-up get a free carry strap\",\"source_id\":\"voice_brief\"}],\"replaces\":\"c9\",\"slide_id\":\"s7\",\"text\":\"The first 50 customers at our Seongsudong pop-up get a free carry strap.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 1331,
+   "prompt_tokens": 3058,
+   "total_tokens": 4389,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 1162,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

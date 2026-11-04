@@ -15,6 +15,8 @@ def check(record) -> list[str]:
         cs = record.claims_for(s["id"])
         if not cs:
             problems.append(f"{s['id']} has no sentences")
+        elif s["type"] == "point" and len(cs) < 2:
+            problems.append(f"{s['id']} is a point slide with only one sentence; add a second supporting sentence (point slides carry 2-3)")
         if s["type"] == "quote" and cs and not cs[0].get("quotes"):
             problems.append(f"{s['id']} is a quote slide but its first sentence has no source quote")
         if s["type"] == "visual" and not record.assets.get(s["id"], {}).get("cutout"):

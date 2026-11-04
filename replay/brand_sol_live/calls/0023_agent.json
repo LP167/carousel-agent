@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Your cover still needs its line — I'll add it so we can render.",
+  "tool_calls": [
+   {
+    "id": "call_4a206980-5379-4dbf-9375-71747f0892f2",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":2,\"quote\":\"I finally drink water at my desk because it is still cold at 4 pm.\",\"source_id\":\"product_guide\"}],\"slide_id\":\"s1\",\"text\":\"Still cold at 4 pm at your desk.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 2074,
+   "prompt_tokens": 2986,
+   "total_tokens": 5060,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 1929,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

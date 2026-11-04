@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Your carousel copy is ready — now I'll prepare the bottle visual.",
+  "tool_calls": [
+   {
+    "id": "call_1cebb371-b9f6-477c-bf1d-52dce95ccc8f",
+    "function": {
+     "arguments": "{\"kind\":\"cutout\",\"prompt\":\"Everyday Bottle water bottle\",\"slide_id\":\"s6\",\"source_id\":\"bottle_photo\"}",
+     "name": "request_visual"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 258,
+   "prompt_tokens": 3023,
+   "total_tokens": 3281,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 135,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

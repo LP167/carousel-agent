@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Starting your bottle carousel — reading your sources first.",
+  "tool_calls": [
+   {
+    "id": "call_c2400c08-6862-47be-a428-0c00b7cafb51",
+    "function": {
+     "arguments": "{\"source_id\":\"bottle_photo\"}",
+     "name": "read_source"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 121,
+   "prompt_tokens": 1995,
+   "total_tokens": 2116,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 50,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

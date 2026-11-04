@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Building your desk-friendly bottle carousel — planning the story first.",
+  "tool_calls": [
+   {
+    "id": "call_708dbee9-cb2b-45f7-b892-af07dac66032",
+    "function": {
+     "arguments": "{\"slides\":[{\"kicker\":\"SOL Everyday Bottle\",\"title\":\"Still cold at 4 pm\",\"type\":\"cover\"},{\"kicker\":\"Stay hydrated\",\"title\":\"Cold for long hours\",\"type\":\"point\"},{\"kicker\":\"Well built\",\"title\":\"Simple strong materials\",\"type\":\"point\"},{\"kicker\":\"Easy care\",\"title\":\"Easy daily care\",\"type\":\"point\"},{\"kicker\":\"Office testers\",\"title\":\"From office testers\",\"type\":\"quote\"},{\"kicker\":\"Meet bottle\",\"title\":\"Meet the bottle\",\"type\":\"visual\"},{\"kicker\":\"Launch offer\",\"title\":\"Launch offer in November\",\"type\":\"point\"},{\"kicker\":\"Get yours\",\"title\":\"Find your bottle\",\"type\":\"cta\"}]}",
+     "name": "set_outline"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 621,
+   "prompt_tokens": 3041,
+   "total_tokens": 3662,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 368,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Adding the lid-care note to round out your care slide.",
+  "tool_calls": [
+   {
+    "id": "call_e425d367-6ee4-46f0-be59-f903e8626559",
+    "function": {
+     "arguments": "{\"quotes\":[{\"page\":2,\"quote\":\"The lid is top-rack dishwasher safe.\",\"source_id\":\"product_guide\"}],\"slide_id\":\"s4\",\"text\":\"The lid is top-rack dishwasher safe.\"}",
+     "name": "record_claim"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 654,
+   "prompt_tokens": 2981,
+   "total_tokens": 3635,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 521,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

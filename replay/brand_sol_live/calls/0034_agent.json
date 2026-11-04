@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Fixes are in — re-rendering to lock the layout before resubmission.",
+  "tool_calls": [
+   {
+    "id": "call_d5c326c7-0d0c-4315-a97a-99aa5f0276a7",
+    "function": {
+     "arguments": "{}",
+     "name": "render_deck"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 367,
+   "prompt_tokens": 3150,
+   "total_tokens": 3517,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 304,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

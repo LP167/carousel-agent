@@ -1,0 +1,41 @@
+{
+ "kind": "agent",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": true,
+  "schema": null
+ },
+ "response": {
+  "content": "Carousel is ready and layout-checked — submitting for final review.",
+  "tool_calls": [
+   {
+    "id": "call_3df2407a-9855-4fe8-a619-f77a075d0bd2",
+    "function": {
+     "arguments": "{\"summary\":\"SOL Everyday Bottle 8-slide carousel for office workers: cold retention, materials, care, tester quote, visual, launch offer, where to buy.\"}",
+     "name": "submit_deck"
+    },
+    "type": "function"
+   }
+  ],
+  "usage": {
+   "completion_tokens": 725,
+   "prompt_tokens": 3021,
+   "total_tokens": 3746,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 625,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}

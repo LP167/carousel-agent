@@ -57,7 +57,8 @@ def run(run_id: str):
     return {"id": run_id, "status": r.status, "objective": r.objective, "timeline": r.timeline,
             "slides": slides, "render_version": (r.render or {}).get("version"), "stale": (r.render or {}).get("stale"),
             "flags": r.flags, "question": r.question, "outline_score": r.outline_score,
-            "counters": r.counters, "busy": run_id in _busy}
+            "counters": r.counters, "busy": run_id in _busy,
+            "transcripts": [{"id": k, "text": v["pages"][0]} for k, v in r.sources.items() if v["kind"] == "audio" and v.get("pages")]}
 
 
 class Note(BaseModel):

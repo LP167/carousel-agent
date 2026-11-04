@@ -32,3 +32,11 @@ def test_cover_lines_need_quotes_only_with_numbers():
     assert not needs_quote("cover", "Drink more water at work")
     assert needs_quote("cover", "Cold for 24 hours")
     assert needs_quote("point", "Made of steel")
+
+
+def test_numbers_must_be_in_quotes():
+    from agent.verification.citation import number_gaps
+    q = [{"quote": "launch price is 28,000 won until November 30"}]
+    assert number_gaps("Launch price 28,000 won until Nov 30", q) == []
+    assert number_gaps("Launch price 25,000 won", q) == ["25,000"]
+    assert number_gaps("18/8 steel", [{"quote": "made of 18/8 stainless steel"}]) == []

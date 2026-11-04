@@ -1,0 +1,16 @@
+{
+ "kind": "transcribe",
+ "request": {
+  "model": "muse-voice-transcribe-1.0",
+  "file": "voice_brief.wav"
+ },
+ "response": {
+  "text": "Hi, it's the SOL team. Two things that aren't in the product guide yet. First, during November, the launch price is 28,000 won instead of 32,000. Second, the first 50 customer at our Seongsudong pop-up get a free carry strap. Keep the the post friendly and remind people the lid can go in the dishwasher but the bottle should be hand washed by hand.",
+  "raw": {
+   "sessionId": "voyager/transcribe/01F2EB15ABA54F1AA51EE3ADF54C572E",
+   "transcript": "Hi, it's the SOL team. Two things that aren't in the product guide yet. First, during November, the launch price is 28,000 won instead of 32,000. Second, the first 50 customer at our Seongsudong pop-up get a free carry strap. Keep the the post friendly and remind people the lid can go in the dishwasher but the bottle should be hand washed by hand.",
+   "audioDurationMs": 26800,
+   "turns": []
+  }
+ }
+}

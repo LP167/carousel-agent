@@ -1,0 +1,32 @@
+{
+ "kind": "verify_claims",
+ "request": {
+  "model": "muse-spark-1.3",
+  "n_messages": 2,
+  "tools": false,
+  "schema": "claim_check"
+ },
+ "response": {
+  "content": "{\"results\": [{\"claim_id\": \"c1\", \"reason\": \"Quote states the same up to 24 hours cold claim.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c2\", \"reason\": \"Quote states the same up to 12 hours hot claim.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c3\", \"reason\": \"Quote states the body is made of 18/8 stainless steel.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c4\", \"reason\": \"Quote states the same BPA-free polypropylene lid with silicone seal.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c5\", \"reason\": \"Quote gives the same hand-wash instruction.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c6\", \"reason\": \"Quote states the lid is top-rack dishwasher safe.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c7\", \"reason\": \"Sentence exactly repeats the quoted testimonial.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c8\", \"reason\": \"Quote states the same 28,000 won launch price during November.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c9\", \"reason\": \"Quote limits the offer to the Seongsudong pop-up, which the sentence omits.\", \"verdict\": \"overstated\"}, {\"claim_id\": \"c10\", \"reason\": \"Quote gives the same online ordering address.\", \"verdict\": \"supported\"}, {\"claim_id\": \"c11\", \"reason\": \"Quote is a personal 'I' anecdote, sentence generalizes it to 'your' desk as a guarantee.\", \"verdict\": \"overstated\"}, {\"claim_id\": \"c12\", \"reason\": \"Quote states the same 500 ml capacity and 310 g empty weight.\", \"verdict\": \"supported\"}]}",
+  "tool_calls": [],
+  "usage": {
+   "completion_tokens": 2251,
+   "prompt_tokens": 770,
+   "total_tokens": 3021,
+   "completion_tokens_details": {
+    "accepted_prediction_tokens": null,
+    "audio_tokens": null,
+    "reasoning_tokens": 1848,
+    "rejected_prediction_tokens": null,
+    "text_tokens": null
+   },
+   "prompt_tokens_details": {
+    "audio_tokens": null,
+    "cache_write_tokens": null,
+    "cached_tokens": 0,
+    "image_tokens": null,
+    "text_tokens": null
+   }
+  }
+ }
+}
